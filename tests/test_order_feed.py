@@ -5,11 +5,11 @@ from pages.main_pages import MainPage
 from pages.order_feed_pages import OrderFeedPage
 
 class TestOrderFeed:
+    @allure.title('Проверка увеличения счетчика заказов: {name_test}')
     @pytest.mark.parametrize('locator, name_test',
-                             [(OrderFeedLocator.COUNT_ORDERS_ALL_TIME, 'Тест увеличения счетчика "Выполнено за всё время"'),
-                             (OrderFeedLocator.COUNT_ORDERS_TODAY, 'Тест увеличения счетчика "Выполнено за сегодня"')])
+                             [(OrderFeedLocator.COUNT_ORDERS_ALL_TIME, 'Выполнено за всё время'),
+                             (OrderFeedLocator.COUNT_ORDERS_TODAY, 'Выполнено за сегодня')])
     def test_count_orders_in_feed_order_page(self, login_driver, locator, name_test):
-        allure.dynamic.title(name_test)
         order_feed_page = OrderFeedPage(login_driver)
         order_feed_page.going_in_feed_order()
         old_value = order_feed_page.get_count_orders(locator)
